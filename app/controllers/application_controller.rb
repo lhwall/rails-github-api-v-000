@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     if !logged_in?
+      client_id = ENV['GITHUB_CLIENT_ID']
       redirect_to "https://github.com/login/oauth/authorize"
     else
       redirect_to controller: :sessions, action: :create, method: :post
