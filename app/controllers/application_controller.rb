@@ -8,8 +8,15 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user
+    if !logged_in?
+      redirect_to "https://github.com/login/oauth/authorize"
+    else
+      redirect_to controller: :sessions, action: :create, method: :post
+    end
   end
 
   def logged_in?
+    return !!session[:token]
   end
+
 end
